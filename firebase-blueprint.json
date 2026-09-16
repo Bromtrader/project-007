@@ -1,0 +1,126 @@
+{
+  "entities": {
+    "products": {
+      "title": "Products",
+      "description": "Wines and spirits product catalog with stock, pricing, and media",
+      "type": "collection",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string" },
+        "size": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "salePrice": { "type": "number" },
+        "onSale": { "type": "boolean" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "additionalImages": { "type": "array" },
+        "stock": { "type": "number" },
+        "lowStockThreshold": { "type": "number" },
+        "sku": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "bestSeller": { "type": "boolean" },
+        "active": { "type": "boolean" },
+        "country": { "type": "string" },
+        "abv": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "rules": {
+        "read": true,
+        "write": "request.auth != null && (request.auth.token.email == 'barrackratemo199@gmail.com' || request.auth.token.role == 'admin' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)))"
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Spirits and wine categories curated by the admin",
+      "type": "collection",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "order": { "type": "number" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "rules": {
+        "read": true,
+        "write": "request.auth != null && (request.auth.token.email == 'barrackratemo199@gmail.com' || request.auth.token.role == 'admin' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)))"
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Customer purchase orders with M-Pesa tracking and dispatch statuses",
+      "type": "collection",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "orderStatus": { "type": "string" },
+        "mpesaReceiptNumber": { "type": "string" },
+        "deliveryZone": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "rules": {
+        "read": true,
+        "create": true,
+        "update": "request.auth != null && (request.auth.token.email == 'barrackratemo199@gmail.com' || request.auth.token.role == 'admin' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)))",
+        "delete": "request.auth != null && (request.auth.token.email == 'barrackratemo199@gmail.com' || request.auth.token.role == 'admin' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)))"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Storewide configuration, homepage copy, banners, and operating hours",
+      "type": "collection",
+      "properties": {
+        "heroHeading": { "type": "string" },
+        "heroSubheading": { "type": "string" },
+        "heroTagline": { "type": "string" },
+        "heroImageUrl": { "type": "string" },
+        "announcements": { "type": "string" },
+        "storeName": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "supportPhone": { "type": "string" },
+        "supportEmail": { "type": "string" },
+        "storeAddress": { "type": "string" },
+        "operatingHours": { "type": "string" },
+        "deliveryFeeNairobiExpress": { "type": "number" },
+        "deliveryFeeNairobiStandard": { "type": "number" },
+        "freeDeliveryThreshold": { "type": "number" },
+        "isMpesaEnabled": { "type": "boolean" },
+        "isCodEnabled": { "type": "boolean" },
+        "isStoreOpen": { "type": "boolean" },
+        "activeNotice": { "type": "string" }
+      },
+      "rules": {
+        "read": true,
+        "write": "request.auth != null && (request.auth.token.email == 'barrackratemo199@gmail.com' || request.auth.token.role == 'admin' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)))"
+      }
+    },
+    "admins": {
+      "title": "Admins",
+      "description": "Authorized administrator accounts",
+      "type": "collection",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "rules": {
+        "read": "request.auth != null",
+        "write": "request.auth != null && request.auth.token.email == 'barrackratemo199@gmail.com'"
+      }
+    }
+  }
+}

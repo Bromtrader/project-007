@@ -1,0 +1,7 @@
+{
+  "name": "UNCLE RATT Wines & Spirits",
+  "description": "Nairobi's premier online wines and spirits boutique. Authentic single malts, cognac, fine wines, champagne, and spirits with fast 1-2 hour express delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
